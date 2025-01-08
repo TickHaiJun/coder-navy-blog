@@ -4,7 +4,7 @@ import { Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navigation = () => {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(true); // Set dark mode as default
   const location = useLocation();
   
   useEffect(() => {
@@ -14,6 +14,11 @@ const Navigation = () => {
       document.documentElement.classList.remove("dark");
     }
   }, [isDark]);
+
+  // Set dark mode on initial load
+  useEffect(() => {
+    document.documentElement.classList.add("dark");
+  }, []);
 
   const links = [
     { path: "/", label: "首页" },
