@@ -1,18 +1,13 @@
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
-
-const article = {
-  title: "欢迎来到我的博客",
-  date: "2024-03-20",
-  cover_image: "/placeholder.svg",
-  description: "这是我的第一篇博客文章，让我们开始这段旅程吧！",
-  category: "技术",
-  tags: ["前端", "React", "Next.js"],
-  slug: "welcome-post"
-};
+import welcome from "../content/articles/welcome.mdx";
 
 const Articles = () => {
   const navigate = useNavigate();
+  const article = {
+    ...welcome,
+    slug: "welcome",
+  };
 
   return (
     <div className="min-h-screen pt-20">
