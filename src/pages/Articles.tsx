@@ -1,12 +1,14 @@
 import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import welcome from "../content/articles/welcome.mdx";
+import type { MDXContent } from "../types/mdx";
 
 const Articles = () => {
   const navigate = useNavigate();
   const article = {
-    ...welcome,
+    ...welcome.frontmatter,
     slug: "welcome",
+    Content: welcome.default,
   };
 
   return (

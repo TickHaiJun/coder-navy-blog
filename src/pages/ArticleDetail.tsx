@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { MDXProvider } from "@mdx-js/react";
 import welcome from "../content/articles/welcome.mdx";
 import { useEffect, useState } from "react";
+import type { MDXContent } from "../types/mdx";
 
 const components = {
   h1: (props: any) => <h1 {...props} className="text-3xl font-bold mb-4" />,
@@ -20,11 +21,11 @@ const components = {
 const ArticleDetail = () => {
   const { slug } = useParams();
   const [toc, setToc] = useState<Array<{ id: string; text: string; level: number }>>([]);
-  const article = welcome;
+  const article = welcome as MDXContent;
 
   useEffect(() => {
     // Extract headings from the MDX content for TOC
-    const content = article.default?.toString() || "";
+    const content = article.toString() || "";
     const headings = content.match(/^#{1,3}\s+.+$/gm) || [];
     const newToc = headings.map((heading) => {
       const level = heading.match(/^#+/)?.[0].length || 1;
@@ -39,7 +40,7 @@ const ArticleDetail = () => {
     return <div>Article not found</div>;
   }
 
-  const Content = article.default;
+  const Content = article;
 
   return (
     <div className="min-h-screen pt-20">
@@ -48,8 +49,8 @@ const ArticleDetail = () => {
           {/* Article content */}
           <div className="lg:col-span-3">
             <Card className="p-8 animate-fade-in">
-              <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
-              <div className="text-gray-500 mb-8">{article.date}</div>
+              <h1 className="text-4xl font-bold mb-4">{article.frontmatter.title}</h1>
+              <div className="text-gray-500 mb-8">{article.frontmatter.date}</div>
               <div className="prose dark:prose-invert max-w-none">
                 <MDXProvider components={components}>
                   <Content />
