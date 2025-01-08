@@ -21,7 +21,8 @@ const components = {
 const ArticleDetail = () => {
   const { slug } = useParams();
   const [toc, setToc] = useState<Array<{ id: string; text: string; level: number }>>([]);
-  const article = welcome as MDXContent;
+  const mdxModule = welcome as unknown as MDXContent;
+  const article = mdxModule;
 
   useEffect(() => {
     // Extract headings from the MDX content for TOC

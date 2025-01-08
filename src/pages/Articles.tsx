@@ -5,10 +5,11 @@ import type { MDXContent } from "../types/mdx";
 
 const Articles = () => {
   const navigate = useNavigate();
+  const mdxModule = welcome as unknown as MDXContent;
   const article = {
-    ...welcome.frontmatter,
+    ...mdxModule.frontmatter,
     slug: "welcome",
-    Content: welcome.default,
+    Content: mdxModule.default,
   };
 
   return (
